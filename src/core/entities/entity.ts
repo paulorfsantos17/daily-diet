@@ -11,7 +11,7 @@ export class Entity<Props> {
   protected constructor(props: Props, id?: UniqueEntityId | string) {
     this.props = props
 
-  if (id instanceof UniqueEntityId) {
+    if (id instanceof UniqueEntityId) {
       this._id = id
     } else {
       this._id = new UniqueEntityId(id)

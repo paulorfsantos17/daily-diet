@@ -1,5 +1,3 @@
 export class MetricsService {
-  calculateMetricsMealsByUser() {
-
-  }
+  calculateMetricsMealsByUser() {}
 }

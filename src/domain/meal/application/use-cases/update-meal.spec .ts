@@ -1,22 +1,26 @@
-import { CreateMealUseCase } from './create-meal'
 import { InMemoryMealRepository } from 'test/repositories/meal-in-memory-repository'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { UpdateMealUseCase } from './update-meal'
+import { makeMeal } from 'test/factories/make-meal'
 
-let sut: CreateMealUseCase
+let sut: UpdateMealUseCase
 let mealRepository: InMemoryMealRepository
-describe('create a meal', () => {
+describe('update a meal', () => {
   beforeEach(() => {
     mealRepository = new InMemoryMealRepository()
-    sut = new CreateMealUseCase(mealRepository)
+    sut = new UpdateMealUseCase(mealRepository)
   })
 
-  it('should create a meal', async () => {
+  it('should update a meal on exist', async () => {
+    mealRepository.items.push(makeMeal(_, new UniqueEntityId('1')))
+
     sut.execute({
       date: new Date(),
-      description: 'description',
+      description: 'new description',
       isDiet: true,
+      mealId: '1',
       name: 'name',
-      userId: new UniqueEntityId('1').toString(),
+      userId: '1',
     })
 
     expect(mealRepository.items).toHaveLength(1)

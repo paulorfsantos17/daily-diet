@@ -1,16 +1,15 @@
-import type { UniqueEntityId } from "@/core/entities/unique-entity-id";
-import { AggregateRoot } from "src/core/entities/aggregate-root";
+import type { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { AggregateRoot } from 'src/core/entities/aggregate-root'
 
 export interface MealProps {
-    name: string
-    description: string
-    date: Date
-    isOnDiet: boolean
-    userId: UniqueEntityId
+  name: string
+  description: string
+  date: Date
+  isOnDiet: boolean
+  userId: UniqueEntityId
 }
 
-export class  Meal extends AggregateRoot<MealProps> {
-
+export class Meal extends AggregateRoot<MealProps> {
   get name(): string {
     return this.props.name
   }
@@ -30,8 +29,8 @@ export class  Meal extends AggregateRoot<MealProps> {
   get userId(): UniqueEntityId {
     return this.props.userId
   }
-  
-  static  create(props: MealProps, id?: UniqueEntityId ) {
+
+  static create(props: MealProps, id?: UniqueEntityId) {
     const meal = new Meal(props, id)
     return meal
   }

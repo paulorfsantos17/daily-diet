@@ -1,4 +1,4 @@
-import { AggregateRoot } from "src/core/entities/aggregate-root"
+import { AggregateRoot } from 'src/core/entities/aggregate-root'
 
 interface UserMetricsMealsProps {
   userId: string
