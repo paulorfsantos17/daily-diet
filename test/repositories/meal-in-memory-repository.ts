@@ -24,4 +24,10 @@ export class InMemoryMealRepository implements MealRepository {
     const item = this.items.find((item) => item.id.toString() === id)
     return item
   }
+
+  async findManyByUserId(userId: string): Promise<Meal[]> {
+    const meals = this.items.filter((item) => item.userId.toString() === userId)
+    if (!meals) return []
+    return meals
+  }
 }
