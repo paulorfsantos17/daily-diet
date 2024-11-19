@@ -2,6 +2,7 @@ import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Meal } from '../../enterprise/meal'
 import { MealRepository } from '../repositories/meal-repository'
 import { ResourceNotFoundError } from '@/core/erros/resource-not-found-error'
+import { NotAllowedError } from '@/core/erros/not-allowed-error'
 
 interface UpdateMealUseCaseRequest {
   mealId: string
@@ -27,6 +28,10 @@ export class UpdateMealUseCase {
 
     if (!mealExists) {
       throw new ResourceNotFoundError()
+    }
+
+    if (userId !== mealExists.userId.toString()) {
+      throw new NotAllowedError()
     }
 
     const meal = Meal.create(

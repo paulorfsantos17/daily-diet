@@ -13,7 +13,14 @@ describe('update a meal', () => {
   })
 
   it('should update a meal on exist', async () => {
-    mealRepository.items.push(makeMeal({}, new UniqueEntityId('1')))
+    mealRepository.items.push(
+      makeMeal(
+        {
+          userId: new UniqueEntityId('1'),
+        },
+        new UniqueEntityId('1'),
+      ),
+    )
 
     await sut.execute({
       date: new Date(),
@@ -32,6 +39,22 @@ describe('update a meal', () => {
 
   it('not should be able update a meal when meal not exist', async () => {
     mealRepository.items.push(makeMeal({}, new UniqueEntityId('1')))
+
+    await expect(
+      sut.execute({
+        date: new Date(),
+        description: 'new description',
+        isDiet: true,
+        mealId: '4',
+        name: 'new name',
+        userId: '1',
+      }),
+    ).rejects.toBeInstanceOf(ResourceNotFoundError)
+  })
+  it('not should be able update a meal when userId not match in meal', async () => {
+    mealRepository.items.push(
+      makeMeal({ userId: new UniqueEntityId('') }, new UniqueEntityId('1')),
+    )
 
     await expect(
       sut.execute({
