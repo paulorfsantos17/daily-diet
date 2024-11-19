@@ -1,0 +1,26 @@
+import { ResourceNotFoundError } from '@/core/erros/resource-not-found-error'
+import { MealRepository } from '../repositories/meal-repository'
+import { NotAllowedError } from '@/core/erros/not-allowed-error'
+
+interface DeleteMealUseCaseRequest {
+  mealId: string
+  userId: string
+}
+
+export class DeleteMealUseCase {
+  constructor(private mealRepository: MealRepository) {}
+
+  async execute({ mealId, userId }: DeleteMealUseCaseRequest) {
+    const meal = await this.mealRepository.findById(mealId)
+
+    if (!meal) {
+      throw new ResourceNotFoundError()
+    }
+
+    if (meal.userId.toString() !== userId) {
+      throw new NotAllowedError()
+    }
+
+    await this.mealRepository.delete(meal)
+  }
+}
