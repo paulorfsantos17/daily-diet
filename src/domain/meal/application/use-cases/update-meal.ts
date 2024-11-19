@@ -25,7 +25,7 @@ export class UpdateMealUseCase {
   }: UpdateMealUseCaseRequest) {
     const mealExists = await this.mealRepository.findById(mealId)
 
-    if (mealExists) {
+    if (!mealExists) {
       return new ResourceNotFoundError()
     }
 

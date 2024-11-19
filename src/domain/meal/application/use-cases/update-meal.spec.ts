@@ -12,17 +12,20 @@ describe('update a meal', () => {
   })
 
   it('should update a meal on exist', async () => {
-    mealRepository.items.push(makeMeal(_, new UniqueEntityId('1')))
+    mealRepository.items.push(makeMeal({}, new UniqueEntityId('1')))
 
-    sut.execute({
+    await sut.execute({
       date: new Date(),
       description: 'new description',
       isDiet: true,
       mealId: '1',
-      name: 'name',
+      name: 'new name',
       userId: '1',
     })
 
     expect(mealRepository.items).toHaveLength(1)
+    expect(mealRepository.items[0].name).toEqual('new name')
+    expect(mealRepository.items[0].description).toEqual('new description')
+    expect(mealRepository.items[0].id).toEqual(new UniqueEntityId('1'))
   })
 })

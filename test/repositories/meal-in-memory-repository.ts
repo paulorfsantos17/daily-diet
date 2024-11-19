@@ -8,8 +8,10 @@ export class InMemoryMealRepository implements MealRepository {
     this.items.push(meal)
   }
 
-  update(meal: Meal): Promise<void> {
-    const itemIndex = this.items.findIndex((item) => item.id === meal.id)
+  async update(meal: Meal): Promise<void> {
+    const itemIndex = this.items.findIndex(
+      (item) => item.id.toString() === meal.id.toString(),
+    )
 
     if (itemIndex === -1) {
       return null
