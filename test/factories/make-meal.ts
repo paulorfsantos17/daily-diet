@@ -1,5 +1,5 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
-import { Meal, MealProps } from '@/domain/meal/enterprise/meal'
+import { Meal, MealProps } from '@/domain/meal/enterprise/entities/meal'
 
 import { faker } from '@faker-js/faker'
 
