@@ -1,4 +1,4 @@
-import type { Meal } from '@/domain/meal/enterprise/meal'
+import type { Meal } from '@/domain/meal/enterprise/entities/meal'
 import type {
   getMetricsByMealsResponse,
   UserMetricsByMealsRepository,

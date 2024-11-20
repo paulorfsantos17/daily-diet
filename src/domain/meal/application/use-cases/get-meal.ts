@@ -1,5 +1,5 @@
 import { ResourceNotFoundError } from '@/core/erros/resource-not-found-error'
-import { Meal } from '../../enterprise/meal'
+import { Meal } from '../../enterprise/entities/meal'
 import { MealRepository } from '../repositories/meal-repository'
 import { NotAllowedError } from '@/core/erros/not-allowed-error'
 

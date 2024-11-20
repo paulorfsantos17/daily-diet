@@ -1,4 +1,4 @@
-import { Meal } from '../../enterprise/meal'
+import { Meal } from '../../enterprise/entities/meal'
 import { MealRepository } from '../repositories/meal-repository'
 
 interface FetchMealUseCaseRequest {

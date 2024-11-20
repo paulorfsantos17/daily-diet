@@ -1,5 +1,5 @@
 import type { MealRepository } from '@/domain/meal/application/repositories/meal-repository'
-import type { Meal } from '@/domain/meal/enterprise/meal'
+import type { Meal } from '@/domain/meal/enterprise/entities/meal'
 
 export class InMemoryMealRepository implements MealRepository {
   public items: Meal[] = []

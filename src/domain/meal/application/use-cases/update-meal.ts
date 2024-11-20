@@ -1,5 +1,5 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
-import { Meal } from '../../enterprise/meal'
+import { Meal } from '../../enterprise/entities/meal'
 import { MealRepository } from '../repositories/meal-repository'
 import { ResourceNotFoundError } from '@/core/erros/resource-not-found-error'
 import { NotAllowedError } from '@/core/erros/not-allowed-error'
