@@ -11,6 +11,7 @@ import { z } from 'zod'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { RegisterUseCase } from '@/domain/identity/application/use-cases/register'
 import { UserAlreadyExistError } from '@/domain/identity/application/use-cases/errors/user-already-exists-error'
+import { Public } from '@/infra/auth/public'
 
 const createUserBodySchema = z
   .object({
@@ -34,8 +35,9 @@ export class RegisterController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async handle(@Body(bodyValidationPipe) createUser: CreateUserBodySchema) {
-    const { name, email, password } = createUser
+  @Public()
+  async handle(@Body(bodyValidationPipe) body: CreateUserBodySchema) {
+    const { name, email, password } = body
 
     try {
       await this.registerUseCase.execute({ name, email, password })
