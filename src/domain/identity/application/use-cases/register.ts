@@ -1,13 +1,15 @@
+import { Injectable } from '@nestjs/common'
 import { User } from '../../enterprise/entities/user'
-import type { HashGenerator } from '../cryptography/hash-generator'
-import type { UserRepository } from '../repositories/user-repository'
+import { HashGenerator } from '../cryptography/hash-generator'
+import { UserRepository } from '../repositories/user-repository'
+import { UserAlreadyExistError } from './errors/user-already-exists-error'
 
 interface RegisterUseCaseRequest {
   name: string
   email: string
   password: string
 }
-
+@Injectable()
 export class RegisterUseCase {
   constructor(
     private userRepository: UserRepository,
@@ -18,7 +20,7 @@ export class RegisterUseCase {
     const userAlreadyExists = await this.userRepository.findByEmail(email)
 
     if (userAlreadyExists) {
-      throw new Error('User already exists')
+      throw new UserAlreadyExistError()
     }
 
     const passwordHashed = await this.hashGenerator.hash(password)
