@@ -1,0 +1,11 @@
+version: '2.29.1'
+
+services:
+  postgres:
+    container_name: "daily-diet-postgres"
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_DB: daily-diet
