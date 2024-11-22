@@ -18,4 +18,20 @@ model User {
   name     String
   email    String @unique
   password String
+  meals    Meal[]
+
+  @@map("user")
+}
+
+model Meal {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  date        DateTime
+  isOnDiet    Boolean
+  user        User     @relation(fields: [userId], references: [id])
+
+  userId String @map("user_id")
+
+  @@map("meal")
 }
