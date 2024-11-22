@@ -13,28 +13,28 @@ import { UserAlreadyExistError } from '@/domain/identity/application/use-cases/e
 import { Public } from '@/infra/auth/public'
 import { AuthenticateUseCase } from '@/domain/identity/application/use-cases/authenticate'
 
-const authenticatedControllerBodySchema = z.object({
+const authenticateControllerBodySchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 })
 
-type AuthenticatedControllerBodySchema = z.infer<
-  typeof authenticatedControllerBodySchema
+type AuthenticateControllerBodySchema = z.infer<
+  typeof authenticateControllerBodySchema
 >
 
 const bodyValidationPipe = new ZodValidationPipe(
-  authenticatedControllerBodySchema,
+  authenticateControllerBodySchema,
 )
 
 @Controller('/auth')
-export class AuthenticatedController {
+export class AuthenticateController {
   constructor(private authenticateUseCase: AuthenticateUseCase) {}
 
   @Post()
   @HttpCode(HttpStatus.OK)
   @Public()
   async handle(
-    @Body(bodyValidationPipe) body: AuthenticatedControllerBodySchema,
+    @Body(bodyValidationPipe) body: AuthenticateControllerBodySchema,
   ) {
     const { email, password } = body
 
