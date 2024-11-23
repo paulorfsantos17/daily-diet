@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
 
-describe('Create Meal Controller (e2e)', () => {
+describe('Update Meal Controller (e2e)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let jwt: JwtService
@@ -29,24 +29,34 @@ describe('Create Meal Controller (e2e)', () => {
       },
     })
 
+    const meal = await prisma.meal.create({
+      data: {
+        name: 'Almoço',
+        description: 'Almoço de hoje',
+        isOnDiet: true,
+        date: new Date().toISOString(),
+        userId: user.id,
+      },
+    })
+
     const accessToken = jwt.sign({ sub: user.id })
 
     const response = await request(app.getHttpServer())
-      .post('/meals')
+      .put(`/meals/${meal.id}`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
-        name: 'Almoço',
+        name: 'Janta',
         description: 'Almoço de hoje',
         isDiet: true,
         date: new Date().toISOString(),
       })
 
-    expect(response.status).toBe(201)
+    expect(response.status).toBe(200)
 
-    const mealOnDataBase = await prisma.meal.findFirstOrThrow({
-      where: { name: 'Almoço' },
+    const mealOnDataBase = await prisma.meal.findUnique({
+      where: { id: meal.id },
     })
 
-    expect(mealOnDataBase).toBeTruthy()
+    expect(mealOnDataBase.name).toBe('Janta')
   })
 })

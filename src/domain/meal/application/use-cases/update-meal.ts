@@ -3,6 +3,7 @@ import { Meal } from '../../enterprise/entities/meal'
 import { MealRepository } from '../repositories/meal-repository'
 import { ResourceNotFoundError } from '@/core/erros/resource-not-found-error'
 import { NotAllowedError } from '@/core/erros/not-allowed-error'
+import { Injectable } from '@nestjs/common'
 
 interface UpdateMealUseCaseRequest {
   mealId: string
@@ -13,6 +14,7 @@ interface UpdateMealUseCaseRequest {
   userId: string
 }
 
+@Injectable()
 export class UpdateMealUseCase {
   constructor(private mealRepository: MealRepository) {}
 
