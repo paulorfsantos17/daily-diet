@@ -1,6 +1,7 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Meal } from '../../enterprise/entities/meal'
 import { MealRepository } from '../repositories/meal-repository'
+import { Injectable } from '@nestjs/common'
 
 interface CreateMealUseCaseRequest {
   name: string
@@ -9,7 +10,7 @@ interface CreateMealUseCaseRequest {
   isDiet: boolean
   userId: string
 }
-
+@Injectable()
 export class CreateMealUseCase {
   constructor(private mealRepository: MealRepository) {}
 

@@ -5,10 +5,24 @@ import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { AuthenticateUseCase } from '@/domain/identity/application/use-cases/authenticate'
+import { CreateMealUseCase } from '@/domain/meal/application/use-cases/create-meal'
+import { CreateMealController } from './controllers/create-meal.controller'
+import { DeleteMealController } from './controllers/delete-meal.controller'
+import { DeleteMealUseCase } from '@/domain/meal/application/use-cases/delete-meal'
 
 @Module({
   imports: [CryptographyModule, DatabaseModule],
-  controllers: [RegisterController, AuthenticateController],
-  providers: [RegisterUseCase, AuthenticateUseCase],
+  controllers: [
+    RegisterController,
+    AuthenticateController,
+    CreateMealController,
+    DeleteMealController,
+  ],
+  providers: [
+    RegisterUseCase,
+    AuthenticateUseCase,
+    CreateMealUseCase,
+    DeleteMealUseCase,
+  ],
 })
 export class HttpModule {}

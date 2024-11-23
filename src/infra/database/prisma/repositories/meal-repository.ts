@@ -2,7 +2,9 @@ import { PrismaService } from '../../prisma.service'
 import { MealRepository } from '@/domain/meal/application/repositories/meal-repository'
 import { Meal } from '@/domain/meal/enterprise/entities/meal'
 import { PrismaMealMapper } from '../mappers/prisma-meal-mapper'
+import { Injectable } from '@nestjs/common'
 
+@Injectable()
 export class PrismaMealRepository implements MealRepository {
   constructor(private prisma: PrismaService) {}
 
