@@ -1,12 +1,14 @@
 import { ResourceNotFoundError } from '@/core/erros/resource-not-found-error'
 import { MealRepository } from '../repositories/meal-repository'
 import { NotAllowedError } from '@/core/erros/not-allowed-error'
+import { Injectable } from '@nestjs/common'
 
 interface DeleteMealUseCaseRequest {
   mealId: string
   userId: string
 }
 
+@Injectable()
 export class DeleteMealUseCase {
   constructor(private mealRepository: MealRepository) {}
 
