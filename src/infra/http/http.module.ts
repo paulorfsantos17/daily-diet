@@ -9,6 +9,8 @@ import { CreateMealUseCase } from '@/domain/meal/application/use-cases/create-me
 import { CreateMealController } from './controllers/create-meal.controller'
 import { DeleteMealController } from './controllers/delete-meal.controller'
 import { DeleteMealUseCase } from '@/domain/meal/application/use-cases/delete-meal'
+import { GetMealController } from './controllers/get-meal.controller'
+import { GetMealUseCase } from '@/domain/meal/application/use-cases/get-meal'
 
 @Module({
   imports: [CryptographyModule, DatabaseModule],
@@ -17,12 +19,14 @@ import { DeleteMealUseCase } from '@/domain/meal/application/use-cases/delete-me
     AuthenticateController,
     CreateMealController,
     DeleteMealController,
+    GetMealController,
   ],
   providers: [
     RegisterUseCase,
     AuthenticateUseCase,
     CreateMealUseCase,
     DeleteMealUseCase,
+    GetMealUseCase,
   ],
 })
 export class HttpModule {}

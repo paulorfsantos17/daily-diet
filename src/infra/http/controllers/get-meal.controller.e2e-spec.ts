@@ -1,3 +1,4 @@
+import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { AppModule } from '@/infra/app.module'
 import { PrismaService } from '@/infra/database/prisma.service'
 import { INestApplication } from '@nestjs/common'
@@ -5,7 +6,7 @@ import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
 
-describe('Delete Meal Controller (e2e)', () => {
+describe('Get Meal Controller (e2e)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let jwt: JwtService
@@ -20,7 +21,7 @@ describe('Delete Meal Controller (e2e)', () => {
 
     await app.init()
   })
-  it('[Delete] /meals/:mealId', async () => {
+  it('[GET] /meals/:mealId', async () => {
     const user = await prisma.user.create({
       data: {
         name: 'John Doe',
@@ -42,15 +43,23 @@ describe('Delete Meal Controller (e2e)', () => {
     const accessToken = jwt.sign({ sub: user.id })
 
     const response = await request(app.getHttpServer())
-      .delete(`/meals/${meal.id}`)
+      .get(`/meals/${meal.id}`)
       .set('Authorization', `Bearer ${accessToken}`)
 
     expect(response.status).toBe(200)
-
-    const mealOnDataBase = await prisma.meal.findUnique({
-      where: { id: meal.id },
-    })
-
-    expect(mealOnDataBase).toBeNull()
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        meal: expect.objectContaining({
+          _id: new UniqueEntityId(meal.id),
+          props: expect.objectContaining({
+            name: 'Almoço',
+            description: 'Almoço de hoje',
+            isOnDiet: true,
+            date: meal.date.toISOString(),
+            userId: new UniqueEntityId(user.id),
+          }),
+        }),
+      }),
+    )
   })
 })
