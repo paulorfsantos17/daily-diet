@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common'
 import { Meal } from '../../enterprise/entities/meal'
 import { MealRepository } from '../repositories/meal-repository'
 
@@ -9,6 +10,7 @@ interface FetchMealUseCaseResponse {
   meals: Meal[]
 }
 
+@Injectable()
 export class FetchMealsUseCase {
   constructor(private mealRepository: MealRepository) {}
 
