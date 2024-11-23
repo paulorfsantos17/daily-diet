@@ -15,6 +15,8 @@ import { FetchMealController } from './controllers/fetch-meals.controller'
 import { FetchMealsUseCase } from '@/domain/meal/application/use-cases/fetch-meals'
 import { UpdateMealController } from './controllers/update-meal.controller'
 import { UpdateMealUseCase } from '@/domain/meal/application/use-cases/update-meal'
+import { GetMetricsUserByMealsController } from './controllers/get-metrics-user-by-meals.controller'
+import { GetMetricsUserByMealsUseCase } from '@/domain/metrics/application/use-cases/get-metrics-user-by-meals'
 
 @Module({
   imports: [CryptographyModule, DatabaseModule],
@@ -26,6 +28,7 @@ import { UpdateMealUseCase } from '@/domain/meal/application/use-cases/update-me
     GetMealController,
     FetchMealController,
     UpdateMealController,
+    GetMetricsUserByMealsController,
   ],
   providers: [
     RegisterUseCase,
@@ -35,6 +38,7 @@ import { UpdateMealUseCase } from '@/domain/meal/application/use-cases/update-me
     GetMealUseCase,
     FetchMealsUseCase,
     UpdateMealUseCase,
+    GetMetricsUserByMealsUseCase,
   ],
 })
 export class HttpModule {}

@@ -1,4 +1,5 @@
-import type { MetricsMeal } from '../../enterprise/metric-meals'
+import { Injectable } from '@nestjs/common'
+import { MetricsMeal } from '../../enterprise/metric-meals'
 import { UserMetricsByMeals } from '../../enterprise/user-metrics-by-meals'
 import { UserMetricsByMealsRepository } from '../repositories/user-metrics-by-meals-repository'
 interface GetMetricsUserByMealsUseCaseRequest {
@@ -9,6 +10,7 @@ interface GetMetricsUserByMealsUseCaseResponse {
   metrics: UserMetricsByMeals
 }
 
+@Injectable()
 export class GetMetricsUserByMealsUseCase {
   constructor(
     private userMetricsByMealsRepository: UserMetricsByMealsRepository,
