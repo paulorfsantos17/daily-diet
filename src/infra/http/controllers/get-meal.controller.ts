@@ -11,6 +11,7 @@ import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { ResourceNotFoundError } from '@/core/erros/resource-not-found-error'
 import { NotAllowedError } from '@/core/erros/not-allowed-error'
 import { GetMealUseCase } from '@/domain/meal/application/use-cases/get-meal'
+import { MealsPresenters } from '../presenters/meals-presenters'
 
 @Controller('/meals/:mealId')
 export class GetMealController {
@@ -27,7 +28,7 @@ export class GetMealController {
       const { meal } = await this.getMealUseCase.execute({ mealId, userId })
 
       return {
-        meal,
+        meal: MealsPresenters.toHTTP(meal),
       }
     } catch (error) {
       if (error instanceof ResourceNotFoundError) {

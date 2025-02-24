@@ -18,7 +18,7 @@ const createMealBodySchema = z.object({
   name: z.string(),
   description: z.string(),
   date: z.string().datetime(),
-  isDiet: z.boolean(),
+  isOnDiet: z.boolean(),
 })
 
 type CreateMealBodySchema = z.infer<typeof createMealBodySchema>
@@ -35,7 +35,7 @@ export class CreateMealController {
     @Body(bodyValidationPipe) body: CreateMealBodySchema,
     @CurrentUser() user: UserPayload,
   ) {
-    const { name, date, description, isDiet } = body
+    const { name, date, description, isOnDiet } = body
     const userId = user.sub
     const dateConvert = new Date(date)
 
@@ -44,7 +44,7 @@ export class CreateMealController {
         name,
         date: dateConvert,
         description,
-        isDiet,
+        isOnDiet,
         userId,
       })
     } catch (error) {

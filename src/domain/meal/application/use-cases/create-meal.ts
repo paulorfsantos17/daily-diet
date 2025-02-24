@@ -7,7 +7,7 @@ interface CreateMealUseCaseRequest {
   name: string
   description: string
   date: Date
-  isDiet: boolean
+  isOnDiet: boolean
   userId: string
 }
 @Injectable()
@@ -18,14 +18,14 @@ export class CreateMealUseCase {
     name,
     description,
     date,
-    isDiet,
+    isOnDiet,
     userId,
   }: CreateMealUseCaseRequest) {
     const meal = Meal.create({
       name,
       description,
       date,
-      isOnDiet: isDiet,
+      isOnDiet,
       userId: new UniqueEntityId(userId),
     })
 

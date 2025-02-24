@@ -1,4 +1,3 @@
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { AppModule } from '@/infra/app.module'
 import { PrismaService } from '@/infra/database/prisma.service'
 import { INestApplication } from '@nestjs/common'
@@ -50,14 +49,12 @@ describe('Get Meal Controller (e2e)', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         meal: expect.objectContaining({
-          _id: new UniqueEntityId(meal.id),
-          props: expect.objectContaining({
-            name: 'Almoço',
-            description: 'Almoço de hoje',
-            isOnDiet: true,
-            date: meal.date.toISOString(),
-            userId: new UniqueEntityId(user.id),
-          }),
+          id: meal.id,
+          name: 'Almoço',
+          description: 'Almoço de hoje',
+          isOnDiet: true,
+          date: meal.date.toISOString(),
+          userId: user.id,
         }),
       }),
     )

@@ -37,7 +37,7 @@ describe('Create Meal Controller (e2e)', () => {
       .send({
         name: 'Almoço',
         description: 'Almoço de hoje',
-        isDiet: true,
+        isOnDiet: true,
         date: new Date().toISOString(),
       })
 

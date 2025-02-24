@@ -19,7 +19,7 @@ const updateMealBodySchema = z.object({
   name: z.string(),
   description: z.string(),
   date: z.string().datetime(),
-  isDiet: z.boolean(),
+  isOnDiet: z.boolean(),
 })
 
 type UpdateMealBodySchema = z.infer<typeof updateMealBodySchema>
@@ -37,7 +37,7 @@ export class UpdateMealController {
     @CurrentUser() user: UserPayload,
     @Param('mealId') mealId: string,
   ) {
-    const { name, date, description, isDiet } = body
+    const { name, date, description, isOnDiet } = body
     const userId = user.sub
     const dateConvert = new Date(date)
 
@@ -46,7 +46,7 @@ export class UpdateMealController {
         name,
         date: dateConvert,
         description,
-        isDiet,
+        isOnDiet,
         userId,
         mealId,
       })

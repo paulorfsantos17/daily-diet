@@ -72,12 +72,11 @@ describe('Get Metrics User By Meals (e2e)', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         metrics: expect.objectContaining({
-          props: expect.objectContaining({
-            totalMeals: 4,
-            mealsWithinDiet: 3,
-            mealsOutOfDiet: 1,
-            bestDietSequence: 2,
-          }),
+          totalMeals: 4,
+          mealsWithinDiet: 3,
+          mealsOutOfDiet: 1,
+          bestDietSequence: 2,
+          percentageMealsWithinDiet: 75,
         }),
       }),
     )

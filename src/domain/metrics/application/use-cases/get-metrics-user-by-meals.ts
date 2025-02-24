@@ -24,11 +24,17 @@ export class GetMetricsUserByMealsUseCase {
 
     const bestDietSequence = this.calculateBestDietSequence(mealsOrderByDate)
 
+    const percentageMealsWithinDiet = this.calculatePercentageMealsWithinDiet(
+      totalMeals,
+      mealsWithinDiet,
+    )
+
     const metrics = UserMetricsByMeals.create({
       totalMeals,
       bestDietSequence,
       mealsOutOfDiet,
       mealsWithinDiet,
+      percentageMealsWithinDiet,
       userId,
     })
 
@@ -53,5 +59,12 @@ export class GetMetricsUserByMealsUseCase {
     }
 
     return theBestSequence
+  }
+
+  private calculatePercentageMealsWithinDiet(
+    totalMeals: number,
+    mealsWithinDiet: number,
+  ): number {
+    return (mealsWithinDiet / totalMeals) * 100
   }
 }

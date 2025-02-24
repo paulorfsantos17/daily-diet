@@ -6,6 +6,7 @@ interface UserMetricsMealsProps {
   mealsWithinDiet: number
   mealsOutOfDiet: number
   bestDietSequence: number
+  percentageMealsWithinDiet: number
 }
 
 export class UserMetricsByMeals extends AggregateRoot<UserMetricsMealsProps> {
@@ -27,6 +28,10 @@ export class UserMetricsByMeals extends AggregateRoot<UserMetricsMealsProps> {
 
   get bestDietSequence(): number {
     return this.props.bestDietSequence
+  }
+
+  get percentageMealsWithinDiet(): number {
+    return this.props.percentageMealsWithinDiet
   }
 
   static create(props: UserMetricsMealsProps, id?: string) {

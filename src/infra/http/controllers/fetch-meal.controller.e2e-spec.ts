@@ -60,10 +60,10 @@ describe('Fetch Meal Controller (e2e)', () => {
       expect.objectContaining({
         meals: expect.arrayContaining([
           expect.objectContaining({
-            props: expect.objectContaining({ name: 'Almoço' }),
+            name: 'Almoço',
           }),
           expect.objectContaining({
-            props: expect.objectContaining({ name: 'Janta' }),
+            name: 'Janta',
           }),
         ]),
       }),

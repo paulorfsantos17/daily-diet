@@ -10,7 +10,7 @@ interface UpdateMealUseCaseRequest {
   name: string
   description: string
   date: Date
-  isDiet: boolean
+  isOnDiet: boolean
   userId: string
 }
 
@@ -23,7 +23,7 @@ export class UpdateMealUseCase {
     name,
     description,
     date,
-    isDiet,
+    isOnDiet,
     userId,
   }: UpdateMealUseCaseRequest) {
     const mealExists = await this.mealRepository.findById(mealId)
@@ -41,7 +41,7 @@ export class UpdateMealUseCase {
         name,
         description,
         date,
-        isOnDiet: isDiet,
+        isOnDiet,
         userId: new UniqueEntityId(userId),
       },
       new UniqueEntityId(mealId),
